@@ -17,6 +17,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'users/show'
     assert is_logged_in?
+    assert_select 'div#error_explanation'
+    assert_select 'div.field_with_errors'
    end
 
 end
