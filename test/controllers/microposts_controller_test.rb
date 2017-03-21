@@ -28,4 +28,11 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to root_url
   end
+
+  test "show micropost" do
+    get micropost_path(microposts(:one))
+    assert_reponse :success
+    assert reponse.body.include?(microposts(:one).name)
+  end
+
 end

@@ -19,17 +19,17 @@ class MicropostsController < ApplicationController
     redirect_to request.referrer || root_url
   end
 
-  def upvote
-    @micorpost = Micropost.find(params[:id])
-    @micorpost.upvote_by current_user
-    redirect_to :back
-  end
+  # def upvote
+  #   @micorpost = Micropost.find(params[:id])
+  #   @micorpost.upvote_by current_user
+  #   redirect_to :back
+  # end
 
-  def downvote
-    @micorpost = Micropost.find(params[:id])
-    @micorpost.downvote_by current_user
-    redirect_to :back
-  end
+  # def downvote
+  #   @micorpost = Micropost.find(params[:id])
+  #   @micorpost.downvote_by current_user
+  #   redirect_to :back
+  # end
 
   private
 
