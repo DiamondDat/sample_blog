@@ -1,0 +1,13 @@
+<ul>
+    <li>
+      <strong><%= comment.user.name %></strong> says:
+      <%= comment.content %>
+      <span>
+        <%= link_to "Delete Comment", [comment.micropost, comment],
+                                    method: :delete,
+                                    data: { confirm: "Are you sure?" } %>
+      </span>
+    </li>
+</ul>
+
+

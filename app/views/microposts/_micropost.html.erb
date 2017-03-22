@@ -18,8 +18,20 @@
     <% end %>
   </span>
   </div>
+  <section>
     <% if current_user?(micropost.user) %>
       <%= link_to "delete", micropost, method: :delete,
                                        data: { confirm: "You sure?" } %>
     <% end %>
+  </section>
+  <section>
+    <%= render micropost.comments %>
+  </section>
+  <section>
+      <%= form_for [micropost, Comment.new] do |f| %>
+
+      <%= f.text_area :content, placeholder: 'Comment...' %>
+      <%= f.submit "Add Comment", class: "btn btn-primary btn-sm" %>
+    <% end %>
+  </section>
 </li>
