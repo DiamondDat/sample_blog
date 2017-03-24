@@ -3,8 +3,8 @@ class LikesController < ApplicationController
   #respond_to :js
 
   def create
-    @like = Like.create(params[:like])
-    @micropost = @like.micropost
+    @micropost = Micropost.find(params[:id])
+    @like = @micropost.likes.create(user_id: user.id)
     render :toggle
   end
 
