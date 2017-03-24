@@ -9,13 +9,11 @@
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
   </span>
   <div>
-  <span id="like_score">
-    Likes: <%= micropost.likes.size %>
+  <span>
+    <%= micropost.likes.size %> users like this.
   </span>
-  <span class="col-md-2">
-    <%= form_tag micropost_likes_path(micropost), remote: true do %>
-      <%= submit_tag 'Like', class: "btn btn-primary btn-sm" %>
-    <% end %>
+  <span id="like" class="col-md-2">
+    <%= render 'likes/like_button', micropost: @micropost %>
   </span>
   </div>
   <section>
@@ -28,10 +26,6 @@
     <%= render micropost.comments %>
   </section>
   <section>
-      <%= form_for [micropost, Comment.new] do |f| %>
-
-      <%= f.text_area :content, placeholder: 'Comment...' %>
-      <%= f.submit "Add Comment", class: "btn btn-primary btn-sm" %>
-    <% end %>
+      <%= render 'comments/form', micropost: micropost %>
   </section>
 </li>

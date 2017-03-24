@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
       flash[:success] = "Comment created."
       redirect_back(fallback_location: user_path(current_user))
     else
-      render 'static_pages/home'
+      redirect_back(fallback_location: user_path(current_user))
     end
   end
 

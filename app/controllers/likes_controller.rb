@@ -1,11 +1,16 @@
 class LikesController < ApplicationController
+
+  #respond_to :js
+
   def create
-    @micropost = Micropost.find(params[:micropost_id])
-    @micropost.likes.create
-    # respond_to do |format|
-    #   format.html { redirect_to @micropost, notice: "Like was successfully created." }
-    #   format.js {}
-    # end
-    redirect_back(fallback_location: user_path(current_user))
+    @like = Like.create(params[:like])
+    @micropost = @like.micropost
+    render :toggle
+  end
+
+  def destroy
+    like = Like.find(params[:id]).destroy
+    @micropost = like.micropost
+    render :toggle
   end
 end

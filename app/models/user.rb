@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :like,       dependent: :destroy
   has_many :microposts, dependent: :destroy
   has_many :comments,   dependent: :destroy
   has_many :active_relationships, class_name:  "Relationship",
@@ -97,6 +98,10 @@ class User < ApplicationRecord
   # Returns true if the current user is following the other user.
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def has_liked?(micropost)
+    likes.find_by(micropost_id: micropost.id)
   end
 
   private
