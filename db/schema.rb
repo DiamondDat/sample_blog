@@ -10,14 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170322073416) do
+ActiveRecord::Schema.define(version: 20170324083530) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.text     "content",      limit: 65535
+    t.text     "content",          limit: 65535
     t.integer  "micropost_id"
     t.integer  "user_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
     t.index ["micropost_id"], name: "index_comments_on_micropost_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end

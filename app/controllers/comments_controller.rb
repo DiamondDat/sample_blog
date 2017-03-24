@@ -1,12 +1,10 @@
 class CommentsController < ApplicationController
   before_action :logged_in_user, only: [:create, :edit, :destroy]
   before_action :correct_user, only: :destroy
+  before_action :find_commentable
   def create
-    # Get the parent micropost
-    @micropost = Micropost.find(params[:micropost_id])
-
     # Build the associated model through the parent
-    @comment = @micropost.comments.build(comment_params)
+    @comment = @commentable.comments.create(comment_params)
 
     # Assign the user directly
     @comment.user = current_user
@@ -24,20 +22,6 @@ class CommentsController < ApplicationController
     @comments = @micropost.comments
   end
 
-  # def edit
-  # end
-
-  # def update
-  #   @micropost = Micropost.find(params[:post_id])
-  #   @comment = @micropost.comments.find(params[:id])
-
-  #   if @comment.update(comments_params)
-  #     redirect_to microposts_path(@micropost)
-  #   else
-  #     render 'edit'
-  #   end
-  # end
-
   def destroy
     @comment.destroy
     flash[:success] = "Comment deleted."
@@ -54,4 +38,10 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.find_by(id: params[:id])
     redirect_to root_url if @comment.nil?
   end
+
+  def find_commentable
+    @commentable = Comment.find(params[:comment_id])     if params[:comment_id]
+    @commentable = Micropost.find(params[:micropost_id]) if params[:micropost_id]
+  end
+
 end

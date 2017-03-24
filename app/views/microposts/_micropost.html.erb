@@ -23,7 +23,8 @@
     <% end %>
   </section>
   <section>
-    <%= render micropost.comments %>
+    <h3>Comments</h3>
+    <%= render(partial: 'comments/comment', collection: micropost.comments) %>
   </section>
   <section>
       <%= render 'comments/form', micropost: micropost %>

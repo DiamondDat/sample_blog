@@ -1,13 +1,24 @@
-<ul>
+<div class="well">
     <li>
       <strong><%= comment.user.name %></strong> says:
       <%= comment.content %>
-      <span>
+      <div>
         <%= link_to "Delete Comment", [comment.micropost, comment],
                                       method: :delete,
                                       data: { confirm: "Are you sure?" } %>
-      </span>
-    </li>
-</ul>
+      </div>
+
+    <%= form_for [comment, Comment.new] do |f| %>
+      <%= f.text_area :content, placeholder: "Reply" %>
+      <%= f.submit "Reply", class: "btn btn-primary btn-sm" %>
+    <% end %>
+
+    <ul>
+      <%= render partial: 'comments/comment', collection: comment.comments %>
+    </ul>
+  </li>
+</div>
+
+
 
 
