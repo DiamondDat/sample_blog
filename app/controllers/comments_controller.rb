@@ -1,10 +1,14 @@
 class CommentsController < ApplicationController
   before_action :logged_in_user, only: [:create, :edit, :destroy]
   before_action :correct_user, only: :destroy
-  before_action :find_commentable
+  # before_action :find_commentable
   def create
     # Build the associated model through the parent
-    @comment = @commentable.comments.create(comment_params)
+    if params[:micropost_id]
+      @comment = @commentable.comments.create(comment_params)
+    else
+      @comment = @commentable.replies.create(comment_params)
+    end
 
     # Assign the user directly
     @comment.user = current_user
@@ -39,9 +43,9 @@ class CommentsController < ApplicationController
     redirect_to root_url if @comment.nil?
   end
 
-  def find_commentable
-    @commentable = Comment.find(params[:comment_id])     if params[:comment_id]
-    @commentable = Micropost.find(params[:micropost_id]) if params[:micropost_id]
-  end
+  # def find_commentable
+  #   @commentable = Comment.find(params[:comment_id])     if params[:comment_id]
+  #   @commentable = Micropost.find(params[:micropost_id]) if params[:micropost_id]
+  # end
 
 end

@@ -1,4 +1,5 @@
 <div class="well">
+  <ul>
     <li>
       <strong><%= comment.user.name %></strong> says:
       <%= comment.content %>
@@ -14,9 +15,10 @@
     <% end %>
 
     <ul>
-      <%= render partial: 'comments/comment', collection: comment.comments %>
+      <%= render partial: 'comments/comment', collection: comment.replies %>
     </ul>
-  </li>
+    </li>
+  </ul>
 </div>
 
 
