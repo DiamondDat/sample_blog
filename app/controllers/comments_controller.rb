@@ -4,13 +4,8 @@ class CommentsController < ApplicationController
   before_action :find_commentable
   def create
     # Build the associated model through the parent
-    if params[:micropost_id]
-      # @commentable = Micropost.find(params[:micropost_id])
-      @comment = @commentable.comments.create(comment_params)
-    else
-      # @commentable = Comment.find(params[:comment_id])
-      @comment = @commentable.replies.create(comment_params)
-    end
+    @comment = params[:micropost_id] ? @commentable.comments.create(comment_params)
+                                     : @commentable.replies.create(comment_params)
 
     # Assign the user directly
     @comment.user = current_user
